@@ -1,0 +1,65 @@
+:root {
+  --void: #0D0D0F;
+  --obsidian: #1A1A1E;
+  --slate: #26262C;
+  --gold: #C9A96E;
+  --gold-light: #E8D4A8;
+  --ivory: #F5F3EE;
+  --stone: #7A7870;
+  --ember: #4A7A70;
+  --danger: #E05252;
+
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-gold: rgba(201,169,110,0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--ivory);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a { color: var(--gold); text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: var(--font-sans); border: none; outline: none; }
+input { font-family: var(--font-sans); }
+
+::selection { background: var(--gold); color: var(--void); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes compassSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.3; }
+}
