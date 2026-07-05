@@ -8,6 +8,6 @@ export async function GET(request) {
   if (searchParams.get('pw') !== PASSWORD) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
-  const submissions = getAllSubmissions()
+  const submissions = await getAllSubmissions()
   return NextResponse.json(submissions)
 }

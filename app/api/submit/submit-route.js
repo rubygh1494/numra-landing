@@ -10,14 +10,13 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
     }
 
-    const record = saveSubmission({
-      gender: gender || null,
-      age: age || null,
-      goal: goal || null,
-      decision: decision || null,
+    const record = await saveSubmission({
+      gender: gender || '',
+      age: age || '',
+      goal: goal || '',
+      decision: decision || '',
       email: email.toLowerCase().trim(),
       source: request.headers.get('referer') || 'direct',
-      userAgent: request.headers.get('user-agent') || '',
     })
 
     return NextResponse.json({ success: true, id: record.id })
