@@ -100,7 +100,7 @@ function SignupForm({ compact = false }) {
     if (!email.includes('@')) { setError('Please enter a valid email address.'); return }
     setSubmitting(true); setError('')
     try {
-      const res = await fetch('/api/submit', {
+      const res = await fetch('https://formspree.io/f/xgojdavg', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...answers, email }),
