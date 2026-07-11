@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-const CALENDLY_URL = 'https://calendly.com/numra1314/numra-compatibility-reading'
+const CALENDLY_URL = 'https://calendly.com/numra1314/numra-compatibility-reading?embed_domain=numra-app.vercel.app&embed_type=Inline'
 const SPOTS_TAKEN = 0
 const SPOTS_TOTAL = 10
 
@@ -39,7 +39,7 @@ export default function ReadingPage() {
             <button style={S.heroCta} onClick={scrollToBooking}>
               Secure my spot →
             </button>
-            <div style={S.heroProof}>Instant booking · 30-day money-back guarantee</div>
+            <div style={S.heroProof}>SGD $27 payment via Stripe · 30-day money-back guarantee</div>
           </div>
           <div style={S.heroPhone}>
             <div style={S.phoneWrap}>
@@ -85,7 +85,7 @@ export default function ReadingPage() {
           <div style={S.bookingEyebrow}>Book your slot · {spotsLeft} left</div>
           <h2 style={S.sectionHeadline}>Pick a time that works.</h2>
           <p style={S.bookingSub}>
-            30 minutes over Zoom. Bring both birthdates. SGD $27 charged at booking — founding member price.
+            30 minutes over Zoom. Bring both birthdates. After you pick a time, you'll be sent to Stripe to complete your SGD $27 payment — that confirms your slot.
           </p>
           {showBooking ? (
             <div style={S.calendlyEmbed}>
@@ -109,6 +109,10 @@ export default function ReadingPage() {
         <div style={S.faqInner}>
           <h2 style={S.sectionHeadline}>Common questions</h2>
           <div style={S.faqList}>
+            <div style={S.faqItem}>
+              <div style={S.faqQ}>What happens after I pick a time?</div>
+              <div style={S.faqA}>You'll see a Calendly screen that says "You are leaving Calendly" — that's normal. Click Continue to complete your SGD $27 payment via Stripe. Once paid, your slot is confirmed and you'll get a Zoom link.</div>
+            </div>
             <div style={S.faqItem}>
               <div style={S.faqQ}>Do I need to know numerology?</div>
               <div style={S.faqA}>No. Bring both birthdates. Everything is explained live.</div>
