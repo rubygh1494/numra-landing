@@ -1,16 +1,17 @@
 'use client'
 import { useState } from 'react'
 
-const STRIPE_LINK = 'https://buy.stripe.com/cNiaEQbXC6dyfDd10Rgbm00'
+const CALENDLY_URL = 'https://calendly.com/numra1314/numra-compatibility-reading'
 const SPOTS_TAKEN = 0
 const SPOTS_TOTAL = 10
 
 export default function ReadingPage() {
+  const [showBooking, setShowBooking] = useState(false)
   const spotsLeft = SPOTS_TOTAL - SPOTS_TAKEN
 
-  const goToStripe = () => {
-    if (typeof window !== 'undefined' && window.fbq) window.fbq('track', 'InitiateCheckout')
-    window.location.href = STRIPE_LINK
+  const scrollToBooking = () => {
+    setShowBooking(true)
+    setTimeout(() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }), 100)
   }
 
   return (
@@ -18,7 +19,7 @@ export default function ReadingPage() {
       <nav style={S.nav}>
         <div style={S.navInner}>
           <a href="/" style={S.navLogo}>NUMRA</a>
-          <button style={S.navCta} onClick={goToStripe}>Book my reading</button>
+          <button style={S.navCta} onClick={scrollToBooking}>Book my reading</button>
         </div>
       </nav>
 
@@ -28,17 +29,17 @@ export default function ReadingPage() {
             <div style={S.heroEyebrow}>Founding Member Price · {spotsLeft} spots left</div>
             <h1 style={S.heroHeadline}>Get your compatibility read — before NUMRA launches.</h1>
             <p style={S.heroSub}>
-              A 30-minute compatibility reading with the founder, live over Zoom. Your numbers, your partner's numbers, where the friction lives, and your peak window together. Actionable, specific, no fluff.
+              A 30-minute compatibility reading with the founder, live over Zoom. Your numbers, your partner's numbers, where the friction lives, and your peak window together. Specific, actionable, no fluff.
             </p>
             <div style={S.priceBox}>
               <div style={S.priceOld}>Regular price SGD $67</div>
               <div style={S.priceNew}>SGD $27</div>
               <div style={S.priceNote}>Founding member price · First {SPOTS_TOTAL} bookings only</div>
             </div>
-            <button style={S.heroCta} onClick={goToStripe}>
-              Secure my spot — SGD $27 →
+            <button style={S.heroCta} onClick={scrollToBooking}>
+              Secure my spot →
             </button>
-            <div style={S.heroProof}>Pay securely via Stripe. Pick your time next.</div>
+            <div style={S.heroProof}>Instant booking · 30-day money-back guarantee</div>
           </div>
           <div style={S.heroPhone}>
             <div style={S.phoneWrap}>
@@ -68,7 +69,7 @@ export default function ReadingPage() {
             <div style={S.whatCard}>
               <div style={S.whatIcon}>③</div>
               <div style={S.whatTitle}>Your peak window together</div>
-              <div style={S.whatBody}>The next 90-day window when your cycles align — best time for big decisions, conversations, or moves.</div>
+              <div style={S.whatBody}>The next 90-day window when your cycles align — best time for big decisions or moves.</div>
             </div>
             <div style={S.whatCard}>
               <div style={S.whatIcon}>④</div>
@@ -79,39 +80,28 @@ export default function ReadingPage() {
         </div>
       </section>
 
-      <section style={S.howSection}>
-        <div style={S.howInner}>
-          <h2 style={S.sectionHeadline}>How it works</h2>
-          <div style={S.howSteps}>
-            <div style={S.howStep}>
-              <div style={S.howNum}>1</div>
-              <div style={S.howText}>
-                <div style={S.howTitle}>Secure your spot</div>
-                <div style={S.howBody}>SGD $27 via Stripe. Takes 30 seconds.</div>
-              </div>
+      <section id="booking" style={S.bookingSection}>
+        <div style={S.bookingInner}>
+          <div style={S.bookingEyebrow}>Book your slot · {spotsLeft} left</div>
+          <h2 style={S.sectionHeadline}>Pick a time that works.</h2>
+          <p style={S.bookingSub}>
+            30 minutes over Zoom. Bring both birthdates. SGD $27 charged at booking — founding member price.
+          </p>
+          {showBooking ? (
+            <div style={S.calendlyEmbed}>
+              <iframe
+                src={CALENDLY_URL}
+                width="100%"
+                height="700"
+                frameBorder="0"
+                title="Book your reading"
+              />
             </div>
-            <div style={S.howStep}>
-              <div style={S.howNum}>2</div>
-              <div style={S.howText}>
-                <div style={S.howTitle}>Pick your time</div>
-                <div style={S.howBody}>Calendly opens after payment. Evenings and weekends available.</div>
-              </div>
-            </div>
-            <div style={S.howStep}>
-              <div style={S.howNum}>3</div>
-              <div style={S.howText}>
-                <div style={S.howTitle}>Bring both birthdates</div>
-                <div style={S.howBody}>Yours and your partner's. That's all you need.</div>
-              </div>
-            </div>
-            <div style={S.howStep}>
-              <div style={S.howNum}>4</div>
-              <div style={S.howText}>
-                <div style={S.howTitle}>Get your reading</div>
-                <div style={S.howBody}>30 minutes over Zoom. Recorded, so you can rewatch.</div>
-              </div>
-            </div>
-          </div>
+          ) : (
+            <button style={S.bookingCta} onClick={() => setShowBooking(true)}>
+              Show available times →
+            </button>
+          )}
         </div>
       </section>
 
@@ -121,7 +111,7 @@ export default function ReadingPage() {
           <div style={S.faqList}>
             <div style={S.faqItem}>
               <div style={S.faqQ}>Do I need to know numerology?</div>
-              <div style={S.faqA}>No. Bring both birthdates. Everything is explained live in plain language.</div>
+              <div style={S.faqA}>No. Bring both birthdates. Everything is explained live.</div>
             </div>
             <div style={S.faqItem}>
               <div style={S.faqQ}>What if my partner doesn't want to join?</div>
@@ -129,23 +119,13 @@ export default function ReadingPage() {
             </div>
             <div style={S.faqItem}>
               <div style={S.faqQ}>What if the reading isn't useful?</div>
-              <div style={S.faqA}>Full refund within 24 hours of your call, no questions asked. Just reply to the confirmation email.</div>
+              <div style={S.faqA}>30-day money-back guarantee. If you finish the call and feel it wasn't worth SGD $27, reply to the receipt email and I'll refund you. No questions.</div>
             </div>
             <div style={S.faqItem}>
-              <div style={S.faqQ}>Why SGD $27?</div>
-              <div style={S.faqA}>Founding member price for the first 10 bookings. Full price is SGD $67 after that. The trade: you get in early, I get real feedback while I build the app.</div>
+              <div style={S.faqQ}>Why founding member price?</div>
+              <div style={S.faqA}>NUMRA launches in 2026 as an app. The first 10 readings help me refine the compatibility framework before it ships. You get the same reading at a fraction of the regular price.</div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section style={S.finalCta}>
-        <div style={S.finalCtaInner}>
-          <div style={S.finalEyebrow}>{spotsLeft} spots left at SGD $27</div>
-          <h2 style={S.finalHeadline}>Ready?</h2>
-          <button style={S.heroCta} onClick={goToStripe}>
-            Secure my spot — SGD $27 →
-          </button>
         </div>
       </section>
 
@@ -173,12 +153,10 @@ const S = {
   heroEyebrow: { display: 'inline-block', fontSize: 11, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#C9A96E', background: 'rgba(201,169,110,0.1)', border: '0.5px solid rgba(201,169,110,0.3)', borderRadius: 100, padding: '4px 12px', marginBottom: 24 },
   heroHeadline: { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(36px, 6vw, 60px)', lineHeight: 1.15, color: '#F5F3EE', marginBottom: 24, letterSpacing: '-0.02em' },
   heroSub: { fontSize: 17, color: '#7A7870', lineHeight: 1.7, maxWidth: 480, marginBottom: 32 },
-
   priceBox: { background: '#1A1A1E', border: '0.5px solid rgba(201,169,110,0.3)', borderRadius: 16, padding: 20, marginBottom: 28, maxWidth: 320 },
   priceOld: { fontSize: 13, color: '#7A7870', textDecoration: 'line-through', marginBottom: 4 },
   priceNew: { fontFamily: "'DM Serif Display', serif", fontSize: 40, color: '#C9A96E', lineHeight: 1, marginBottom: 6 },
   priceNote: { fontSize: 12, color: '#7A7870' },
-
   heroCta: { background: '#C9A96E', color: '#0D0D0F', border: 'none', borderRadius: 100, padding: '16px 32px', fontSize: 15, fontWeight: 600, cursor: 'pointer', marginBottom: 16, fontFamily: "'Inter', sans-serif" },
   heroProof: { fontSize: 13, color: '#7A7870' },
 
@@ -187,36 +165,29 @@ const S = {
   phoneDynamic: { width: 72, height: 8, background: '#0D0D0F', borderRadius: 10, margin: '0 auto 8px' },
   phoneScreen: { width: '100%', display: 'block', borderRadius: '0 0 34px 34px' },
 
-  sectionHeadline: { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(28px, 4vw, 40px)', color: '#F5F3EE', lineHeight: 1.2, marginBottom: 40, textAlign: 'center' },
+  sectionHeadline: { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', color: '#F5F3EE', lineHeight: 1.15, marginBottom: 32, textAlign: 'center' },
 
-  whatSection: { padding: '80px 24px', background: '#1A1A1E', borderTop: '0.5px solid rgba(255,255,255,0.04)' },
+  whatSection: { padding: '80px 24px', background: '#0D0D0F', borderTop: '0.5px solid rgba(255,255,255,0.04)' },
   whatInner: { maxWidth: 1000, margin: '0 auto' },
-  whatGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20 },
-  whatCard: { background: '#0D0D0F', borderRadius: 16, border: '0.5px solid rgba(255,255,255,0.06)', padding: 28 },
+  whatGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 },
+  whatCard: { background: '#1A1A1E', border: '0.5px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 28 },
   whatIcon: { fontFamily: "'DM Serif Display', serif", fontSize: 32, color: '#C9A96E', marginBottom: 12 },
-  whatTitle: { fontFamily: "'DM Serif Display', serif", fontSize: 20, color: '#F5F3EE', marginBottom: 10, lineHeight: 1.3 },
+  whatTitle: { fontFamily: "'DM Serif Display', serif", fontSize: 20, color: '#F5F3EE', marginBottom: 8, lineHeight: 1.3 },
   whatBody: { fontSize: 14, color: '#7A7870', lineHeight: 1.6 },
 
-  howSection: { padding: '80px 24px' },
-  howInner: { maxWidth: 700, margin: '0 auto' },
-  howSteps: { display: 'flex', flexDirection: 'column', gap: 24 },
-  howStep: { display: 'flex', gap: 24, alignItems: 'flex-start' },
-  howNum: { fontFamily: "'DM Serif Display', serif", fontSize: 32, color: '#C9A96E', lineHeight: 1, flex: '0 0 40px' },
-  howText: { flex: 1 },
-  howTitle: { fontFamily: "'DM Serif Display', serif", fontSize: 20, color: '#F5F3EE', marginBottom: 6 },
-  howBody: { fontSize: 14, color: '#7A7870', lineHeight: 1.6 },
+  bookingSection: { padding: '80px 24px', background: 'linear-gradient(180deg, #0D0D0F 0%, #181410 50%, #0D0D0F 100%)', borderTop: '0.5px solid rgba(201,169,110,0.1)' },
+  bookingInner: { maxWidth: 800, margin: '0 auto', textAlign: 'center' },
+  bookingEyebrow: { display: 'inline-block', fontSize: 11, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#C9A96E', background: 'rgba(201,169,110,0.1)', border: '0.5px solid rgba(201,169,110,0.3)', borderRadius: 100, padding: '4px 14px', marginBottom: 20 },
+  bookingSub: { fontSize: 15, color: '#7A7870', lineHeight: 1.6, marginBottom: 32, maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' },
+  bookingCta: { background: '#C9A96E', color: '#0D0D0F', border: 'none', borderRadius: 100, padding: '16px 32px', fontSize: 15, fontWeight: 600, cursor: 'pointer', fontFamily: "'Inter', sans-serif" },
+  calendlyEmbed: { background: '#1A1A1E', borderRadius: 16, overflow: 'hidden', border: '0.5px solid rgba(255,255,255,0.06)' },
 
-  faqSection: { padding: '80px 24px', background: '#1A1A1E' },
+  faqSection: { padding: '80px 24px', background: '#0D0D0F', borderTop: '0.5px solid rgba(255,255,255,0.04)' },
   faqInner: { maxWidth: 700, margin: '0 auto' },
   faqList: { display: 'flex', flexDirection: 'column', gap: 20 },
-  faqItem: { background: '#0D0D0F', borderRadius: 12, border: '0.5px solid rgba(255,255,255,0.06)', padding: 24 },
-  faqQ: { fontFamily: "'DM Serif Display', serif", fontSize: 18, color: '#F5F3EE', marginBottom: 8 },
+  faqItem: { background: '#1A1A1E', border: '0.5px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24 },
+  faqQ: { fontFamily: "'DM Serif Display', serif", fontSize: 18, color: '#F5F3EE', marginBottom: 8, lineHeight: 1.3 },
   faqA: { fontSize: 14, color: '#7A7870', lineHeight: 1.6 },
-
-  finalCta: { padding: '100px 24px', background: 'linear-gradient(180deg, #0D0D0F 0%, #181410 50%, #0D0D0F 100%)', borderTop: '0.5px solid rgba(201,169,110,0.1)', textAlign: 'center' },
-  finalCtaInner: { maxWidth: 600, margin: '0 auto' },
-  finalEyebrow: { display: 'inline-block', fontSize: 11, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#C9A96E', background: 'rgba(201,169,110,0.1)', border: '0.5px solid rgba(201,169,110,0.3)', borderRadius: 100, padding: '4px 14px', marginBottom: 20 },
-  finalHeadline: { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(40px, 6vw, 60px)', color: '#F5F3EE', lineHeight: 1.15, marginBottom: 32 },
 
   footer: { padding: '48px 24px', borderTop: '0.5px solid rgba(255,255,255,0.06)' },
   footerInner: { maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 },
