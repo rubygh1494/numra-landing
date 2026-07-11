@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-const CALENDLY_URL = 'https://calendly.com/numra1314/numra-compatibility-reading'
+const CALENDLY_URL = 'https://cal.com/numra-svqp6h/compatibility-reading'
 const SPOTS_TAKEN = 0
 const SPOTS_TOTAL = 10
 
